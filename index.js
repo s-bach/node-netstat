@@ -119,17 +119,21 @@ function emitLines (stream) {
     });
 }
 
-module.exports = exports = function (options, callback) {
+module.exports = exports = function (cb) {
     var platform = os.platform();
     var command = commands[platform];
     var parser = parsers[platform];
     if (!parser || !command) {
-        throw new Error('platform is not supported.');
+        cb.call new Error('platform is not supported.');
     }
 
     var proc = spawn(command.cmd, command.args);
     emitLines(proc.stdout);
+    lines = [];
     proc.stdout.on('line', function (line) {
-        parser(line, callback);
+        lines[i] = line;
+    });
+    proc.stdout.on('end', function () {
+        cb.call(null, null, lines);
     });
 };
