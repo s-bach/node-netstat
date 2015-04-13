@@ -64,10 +64,10 @@ function normalizeValues (item) {
 }
 
 var parsers = {
-    linux: function (line, callback) {
+    linux: function (line) {
         var parts = line.split(/\s/).filter(String);
         if (!parts.length || parts.length != 7) {
-            return;
+            return null;
         }
 
         var item = {
@@ -78,13 +78,13 @@ var parsers = {
             pid: parts[6]
         };
 
-        callback(normalizeValues(item));
+        return normalizeValues(item);
     },
 
-    win32: function (line, callback) {
+    win32: function (line) {
         var parts = line.split(/\s/).filter(String);
         if (!parts.length || parts.length != 5) {
-            return;
+            return null;
         }
 
         var item = {
@@ -95,7 +95,7 @@ var parsers = {
             pid: parts[4]
         };
 
-        callback(normalizeValues(item));
+        return normalizeValues(item);
     }
 };
 
@@ -131,7 +131,9 @@ module.exports = exports = function (cb) {
     emitLines(proc.stdout);
     lines = [];
     proc.stdout.on('line', function (line) {
-        lines.push(line);
+        var line = parser(line);
+        if(line != null)
+            lines.push(line);
     });
     proc.stdout.on('end', function () {
         cb.call(null, null, lines);
