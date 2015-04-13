@@ -124,7 +124,7 @@ module.exports = exports = function (cb) {
     var command = commands[platform];
     var parser = parsers[platform];
     if (!parser || !command) {
-        cb.call new Error('platform is not supported.');
+        cb.call(null, new Error('platform is not supported.'));
     }
 
     var proc = spawn(command.cmd, command.args);
