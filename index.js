@@ -131,7 +131,7 @@ module.exports = exports = function (cb) {
     emitLines(proc.stdout);
     lines = [];
     proc.stdout.on('line', function (line) {
-        lines[i] = line;
+        lines.push(line);
     });
     proc.stdout.on('end', function () {
         cb.call(null, null, lines);
