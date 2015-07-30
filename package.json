@@ -1,22 +1,16 @@
 {
   "name": "node-netstat",
-  "version": "0.7.1",
-  "description": "programmatic netstat utility",
+  "version": "1.0.0",
+  "description": "node-netstat",
   "main": "index.js",
   "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/s-bach/node-netstat"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "netstat", "utility"
-  ],
   "author": {
-    "name": "Daniel Krainas",
-    "email": "me@danielkrainas.com"
+    "name": "",
+    "email": ""
   },
-  "license": "MIT"
+  "license": "none"
 }
